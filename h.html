@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Varshneya — CS Student</title>
+<meta property="og:title" content="Varshneya — CS Student Portfolio"/>
+<meta property="og:description" content="2nd year CS student at NIT Patna. Open to internships."/>
+<meta name="description" content="Portfolio of Varshneya, CS student at NIT Patna"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,300&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#080b10;
+  --bg2:#0d1117;
+  --bg3:#161b22;
+  --surface:#1c2330;
+  --border:rgba(48,54,70,0.8);
+  --border-hi:rgba(88,166,255,0.3);
+  --text:#e6edf3;
+  --muted:#8b949e;
+  --dim:#484f58;
+  --green:#3fb950;
+  --green-dim:rgba(63,185,80,0.15);
+  --green-border:rgba(63,185,80,0.3);
+  --blue:#58a6ff;
+  --blue-dim:rgba(88,166,255,0.1);
+  --purple:#bc8cff;
+  --orange:#ffa657;
+  --red:#ff7b72;
+  --yellow:#e3b341;
+  --mono:'JetBrains Mono',monospace;
+  --sans:'Space Grotesk',sans-serif;
+  --r:8px;
+  --r-lg:14px;
+  --max:1080px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.7;overflow-x:hidden;cursor:none}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--green);border-radius:2px}
+a{cursor:none}
+
+/* cursor */
+#cur{position:fixed;width:8px;height:8px;background:var(--green);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .15s,height .15s,background .2s}
+#cur-r{position:fixed;width:32px;height:32px;border:1px solid rgba(63,185,80,.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:left .1s ease,top .1s ease,width .2s,height .2s}
+
+/* layout */
+.wrap{max-width:var(--max);margin:0 auto;padding:0 1.75rem}
+section{padding:90px 0}
+
+/* scanline overlay */
+body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.03) 2px,rgba(0,0,0,.03) 4px);pointer-events:none;z-index:999}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 0;background:rgba(8,11,16,.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);transition:padding .3s}
+nav .inner{max-width:var(--max);margin:0 auto;padding:0 1.75rem;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:var(--mono);font-size:.95rem;font-weight:500;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:.4rem}
+.logo .prompt{color:var(--green)}
+.logo .caret{color:var(--green);animation:blink 1.2s step-end infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.nav-links{display:flex;align-items:center;gap:1.75rem;list-style:none}
+.nav-links a{font-family:var(--mono);font-size:.78rem;color:var(--muted);text-decoration:none;transition:color .2s;letter-spacing:.02em}
+.nav-links a:hover{color:var(--green)}
+.nav-links a span{color:var(--green)}
+.nav-hire{padding:.45rem 1.1rem;border:1px solid var(--green);border-radius:var(--r);color:var(--green)!important;transition:background .2s,transform .2s!important}
+.nav-hire:hover{background:var(--green-dim);transform:translateY(-2px)!important}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer}
+.hamburger span{width:22px;height:1.5px;background:var(--text);display:block;transition:all .3s}
+
+/* ── HERO ── */
+#hero{min-height:100vh;display:flex;align-items:center;padding-top:80px;position:relative;overflow:hidden}
+.grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(63,185,80,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(63,185,80,.04) 1px,transparent 1px);background-size:40px 40px;mask-image:radial-gradient(ellipse 80% 70% at 50% 50%,black 30%,transparent 100%)}
+.hero-glow{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(63,185,80,.07) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+
+/* ── PASSPORT PHOTO ── */
+.passport-photo-wrap{position:absolute;top:100px;right:1.75rem;z-index:10}
+.passport-photo{width:110px;height:140px;border-radius:var(--r-lg);border:2px solid var(--green-border);background:var(--bg3);overflow:hidden;box-shadow:0 0 24px rgba(63,185,80,.15),0 8px 32px rgba(0,0,0,.6);position:relative;display:flex;align-items:center;justify-content:center}
+.passport-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+.passport-photo-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.35rem;color:var(--dim);font-family:var(--mono);font-size:.62rem;text-align:center;padding:.5rem;pointer-events:none}
+.passport-photo-placeholder svg{width:32px;height:32px;color:var(--dim)}
+.passport-photo-label{position:absolute;bottom:-1.4rem;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:.6rem;color:var(--green);white-space:nowrap;letter-spacing:.06em}
+
+.terminal-window{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;margin-bottom:2rem;max-width:580px}
+.terminal-bar{background:var(--bg3);padding:.6rem 1rem;display:flex;align-items:center;gap:.5rem;border-bottom:1px solid var(--border)}
+.t-dot{width:12px;height:12px;border-radius:50%}
+.t-dot.r{background:#ff5f57}.t-dot.y{background:#febc2e}.t-dot.g{background:#28c840}
+.terminal-title{font-family:var(--mono);font-size:.72rem;color:var(--dim);margin-left:.5rem}
+.terminal-body{padding:1.25rem 1.4rem;font-family:var(--mono);font-size:.82rem;line-height:1.9}
+.t-line{display:flex;flex-wrap:wrap;gap:.3rem;align-items:baseline}
+.t-prompt{color:var(--green)}
+.t-cmd{color:var(--text)}
+.t-out{color:var(--muted);padding-left:1.4rem}
+.t-key{color:var(--blue)}
+.t-val{color:var(--yellow)}
+.t-str{color:var(--orange)}
+.t-num{color:var(--purple)}
+.t-cur{display:inline-block;width:8px;height:1em;background:var(--green);vertical-align:middle;animation:blink 1s step-end infinite;margin-left:2px}
+
+.hero-tagline{font-family:var(--sans);font-size:clamp(2rem,4.5vw,3.2rem);font-weight:700;line-height:1.2;letter-spacing:-.03em;margin-bottom:1rem}
+.hero-tagline .dim{color:var(--muted);font-weight:300}
+.hero-tagline .hi{color:var(--green)}
+.hero-sub{font-size:1rem;color:var(--muted);max-width:500px;margin-bottom:2rem;font-weight:300;line-height:1.85}
+.hero-badges{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:2.5rem}
+.badge{display:inline-flex;align-items:center;gap:.4rem;padding:.3rem .8rem;border-radius:100px;font-family:var(--mono);font-size:.72rem;font-weight:500;border:1px solid}
+.badge-green{background:var(--green-dim);border-color:var(--green-border);color:var(--green)}
+.badge-blue{background:var(--blue-dim);border-color:rgba(88,166,255,.3);color:var(--blue)}
+.badge-purple{background:rgba(188,140,255,.08);border-color:rgba(188,140,255,.25);color:var(--purple)}
+.badge .dot{width:6px;height:6px;border-radius:50%;background:currentColor;animation:pulse-dot 2s infinite}
+@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+.hero-ctas{display:flex;gap:.9rem;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:.45rem;padding:.7rem 1.5rem;border-radius:var(--r);font-family:var(--mono);font-size:.82rem;font-weight:500;text-decoration:none;transition:all .25s;cursor:none;border:1px solid transparent}
+.btn-primary{background:var(--green);color:#0d1117;border-color:var(--green)}
+.btn-primary:hover{opacity:.85;transform:translateY(-2px);box-shadow:0 0 24px rgba(63,185,80,.3)}
+.btn-ghost{background:transparent;color:var(--muted);border-color:var(--border)}
+.btn-ghost:hover{border-color:var(--blue);color:var(--blue);transform:translateY(-2px)}
+.scroll-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.4rem;font-family:var(--mono);font-size:.68rem;color:var(--dim);letter-spacing:.08em}
+.scroll-line{width:1px;height:36px;background:linear-gradient(to bottom,var(--green),transparent);animation:scroll-b 2s ease-in-out infinite}
+@keyframes scroll-b{0%,100%{transform:scaleY(1);opacity:.8}50%{transform:scaleY(.4);opacity:.2}}
+
+/* ── SECTION COMMON ── */
+.sec-label{font-family:var(--mono);font-size:.72rem;color:var(--green);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.75rem;display:flex;align-items:center;gap:.6rem}
+.sec-label::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--green-border),transparent);max-width:80px}
+.sec-title{font-family:var(--sans);font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;letter-spacing:-.03em;margin-bottom:.6rem;line-height:1.2}
+.sec-sub{color:var(--muted);font-size:.95rem;font-weight:300;line-height:1.85;max-width:540px}
+.sec-head{margin-bottom:3rem}
+
+/* reveal */
+.r{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease}
+.r.on{opacity:1;transform:translateY(0)}
+.r.d1{transition-delay:.1s}.r.d2{transition-delay:.2s}.r.d3{transition-delay:.3s}.r.d4{transition-delay:.4s}
+
+/* ── ABOUT ── */
+#about{background:var(--bg2)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.about-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.5rem;margin-bottom:1rem}
+.about-card:hover{border-color:var(--border-hi);transition:border-color .3s}
+.ac-label{font-family:var(--mono);font-size:.7rem;color:var(--green);margin-bottom:.4rem;letter-spacing:.06em}
+.ac-val{font-size:.95rem;color:var(--text);font-weight:500}
+.ac-sub{font-size:.82rem;color:var(--muted);font-weight:300}
+.edu-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.5rem;border-left:3px solid var(--green);margin-bottom:1rem}
+.edu-deg{font-family:var(--sans);font-size:1.05rem;font-weight:600;color:var(--text);margin-bottom:.25rem}
+.edu-uni{font-size:.9rem;color:var(--blue);font-weight:500;margin-bottom:.25rem}
+.edu-year{font-family:var(--mono);font-size:.75rem;color:var(--dim);margin-bottom:.75rem}
+.course-tags{display:flex;flex-wrap:wrap;gap:.4rem}
+.course-tag{padding:.2rem .6rem;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);font-family:var(--mono);font-size:.7rem;color:var(--muted)}
+.about-right p{color:var(--muted);font-weight:300;line-height:1.9;margin-bottom:.9rem;font-size:.95rem}
+.about-right p strong{color:var(--text);font-weight:500}
+.highlight-box{background:var(--green-dim);border:1px solid var(--green-border);border-radius:var(--r);padding:1rem 1.25rem;margin-top:1.25rem;font-family:var(--mono);font-size:.8rem;line-height:1.8;color:var(--green)}
+.highlight-box .hb-label{color:var(--green);opacity:.6;font-size:.7rem;display:block;margin-bottom:.3rem}
+
+/* ── SKILLS ── */
+.skills-outer{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+.skill-block{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.5rem;transition:border-color .3s,transform .3s}
+.skill-block:hover{border-color:var(--border-hi);transform:translateY(-3px)}
+.sb-header{display:flex;align-items:center;gap:.6rem;margin-bottom:1.1rem}
+.sb-icon{font-size:1.25rem}
+.sb-name{font-family:var(--sans);font-size:.95rem;font-weight:600;color:var(--text)}
+.sb-level{font-family:var(--mono);font-size:.68rem;color:var(--green);background:var(--green-dim);border:1px solid var(--green-border);padding:.15rem .5rem;border-radius:100px;margin-left:auto}
+.skill-list{display:flex;flex-wrap:wrap;gap:.45rem}
+.skill-pill{padding:.25rem .65rem;background:var(--bg3);border:1px solid var(--border);border-radius:100px;font-family:var(--mono);font-size:.72rem;color:var(--muted);transition:all .2s}
+.skill-pill:hover{border-color:var(--green-border);color:var(--green);background:var(--green-dim)}
+.learning-banner{grid-column:1/-1;background:linear-gradient(135deg,rgba(88,166,255,.06),rgba(63,185,80,.04));border:1px solid var(--border);border-radius:var(--r-lg);padding:1.25rem 1.5rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.lb-icon{font-size:1.5rem}
+.lb-text{font-size:.88rem;color:var(--muted);font-weight:300}
+.lb-text strong{color:var(--blue)}
+
+/* ── PROJECTS ── */
+#projects{background:var(--bg2)}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.25rem}
+.proj-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;text-decoration:none;color:inherit;display:flex;flex-direction:column;transition:all .3s;cursor:none}
+.proj-card:hover{border-color:var(--border-hi);transform:translateY(-5px);box-shadow:0 16px 48px rgba(0,0,0,.5)}
+.proj-header{padding:1.4rem 1.4rem .9rem;display:flex;align-items:flex-start;justify-content:space-between;gap:1rem}
+.proj-icon-wrap{width:42px;height:42px;border-radius:var(--r);display:flex;align-items:center;justify-content:center;font-size:1.3rem;border:1px solid var(--border);background:var(--bg2);flex-shrink:0}
+.proj-links-top{display:flex;gap:.5rem}
+.proj-link-icon{width:30px;height:30px;border:1px solid var(--border);border-radius:var(--r);display:flex;align-items:center;justify-content:center;color:var(--dim);transition:all .2s;text-decoration:none;cursor:none}
+.proj-link-icon:hover{border-color:var(--green-border);color:var(--green)}
+.proj-link-icon svg{width:14px;height:14px}
+.proj-body{padding:0 1.4rem 1.4rem;flex:1;display:flex;flex-direction:column}
+.proj-status{display:inline-flex;align-items:center;gap:.3rem;font-family:var(--mono);font-size:.68rem;color:var(--muted);margin-bottom:.5rem}
+.proj-status .s-dot{width:5px;height:5px;border-radius:50%}
+.s-dot-live{background:var(--green);box-shadow:0 0 6px var(--green)}
+.s-dot-wip{background:var(--yellow)}
+.s-dot-done{background:var(--blue)}
+.proj-title{font-family:var(--sans);font-size:1rem;font-weight:600;color:var(--text);margin-bottom:.4rem;line-height:1.3}
+.proj-desc{font-size:.85rem;color:var(--muted);font-weight:300;line-height:1.75;flex:1;margin-bottom:1rem}
+.proj-stack{display:flex;flex-wrap:wrap;gap:.35rem}
+.proj-tech{padding:.18rem .55rem;background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);font-family:var(--mono);font-size:.68rem;color:var(--muted)}
+
+/* ── CERTIFICATIONS ── */
+#certifications{background:var(--bg)}
+.certs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.25rem}
+.cert-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.5rem;display:flex;flex-direction:column;gap:.75rem;transition:all .3s;text-decoration:none;color:inherit;cursor:none;position:relative;overflow:hidden}
+.cert-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--green),var(--blue));opacity:0;transition:opacity .3s}
+.cert-card:hover{border-color:var(--border-hi);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.4)}
+.cert-card:hover::before{opacity:1}
+.cert-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem}
+.cert-icon{width:44px;height:44px;border-radius:var(--r);background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.25rem;flex-shrink:0}
+.cert-badge{display:inline-flex;align-items:center;gap:.3rem;padding:.2rem .6rem;border-radius:100px;font-family:var(--mono);font-size:.65rem;background:var(--blue-dim);border:1px solid rgba(88,166,255,.3);color:var(--blue)}
+.cert-title{font-family:var(--sans);font-size:.95rem;font-weight:600;color:var(--text);line-height:1.35}
+.cert-issuer{font-family:var(--mono);font-size:.75rem;color:var(--green);font-weight:500}
+.cert-date{font-family:var(--mono);font-size:.7rem;color:var(--dim)}
+.cert-desc{font-size:.83rem;color:var(--muted);font-weight:300;line-height:1.7}
+.cert-link{display:inline-flex;align-items:center;gap:.35rem;font-family:var(--mono);font-size:.72rem;color:var(--blue);text-decoration:none;margin-top:auto;transition:color .2s;cursor:none}
+.cert-link:hover{color:var(--green)}
+.cert-link svg{width:12px;height:12px}
+
+/* ── EXPERIENCE / TIMELINE ── */
+.tl{position:relative;padding-left:1.75rem}
+.tl::before{content:'';position:absolute;left:0;top:8px;width:1px;height:calc(100% - 8px);background:linear-gradient(to bottom,var(--green),rgba(63,185,80,.1))}
+.tl-item{position:relative;margin-bottom:2.5rem}
+.tl-item:last-child{margin-bottom:0}
+.tl-dot{position:absolute;left:-1.88rem;top:5px;width:10px;height:10px;border-radius:50%;background:var(--bg2);border:2px solid var(--green);box-shadow:0 0 8px rgba(63,185,80,.4)}
+.tl-when{font-family:var(--mono);font-size:.72rem;color:var(--dim);margin-bottom:.35rem;letter-spacing:.04em}
+.tl-role{font-family:var(--sans);font-size:1rem;font-weight:600;color:var(--text);margin-bottom:.15rem}
+.tl-where{font-family:var(--mono);font-size:.78rem;color:var(--blue);margin-bottom:.65rem}
+.tl-desc{font-size:.9rem;color:var(--muted);font-weight:300;line-height:1.8}
+
+/* ── CONTACT ── */
+#contact{background:var(--bg2);text-align:center}
+.contact-inner{max-width:560px;margin:0 auto}
+.contact-term{background:var(--bg);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.5rem;margin:2.5rem 0;text-align:left;font-family:var(--mono);font-size:.82rem;line-height:2}
+.ct-available{color:var(--green)}
+.ct-label{color:var(--muted)}
+.ct-val{color:var(--yellow)}
+.contact-email{font-family:var(--mono);font-size:1.05rem;color:var(--text);text-decoration:none;border-bottom:1px solid var(--border);padding-bottom:2px;transition:border-color .3s,color .3s;display:inline-block;margin-bottom:2rem}
+.contact-email:hover{color:var(--green);border-color:var(--green)}
+.socials{display:flex;justify-content:center;gap:.75rem;margin-top:1.75rem;flex-wrap:wrap}
+.soc-btn{display:flex;align-items:center;gap:.5rem;padding:.55rem 1.1rem;background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);text-decoration:none;color:var(--muted);font-family:var(--mono);font-size:.78rem;transition:all .25s;cursor:none}
+.soc-btn:hover{border-color:var(--green-border);color:var(--green);background:var(--green-dim);transform:translateY(-2px)}
+.soc-btn svg{width:15px;height:15px}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--border);padding:1.5rem 0}
+footer .fw{max-width:var(--max);margin:0 auto;padding:0 1.75rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+footer p{font-family:var(--mono);font-size:.72rem;color:var(--dim)}
+footer a{color:var(--green);text-decoration:none}
+.uptime{display:flex;align-items:center;gap:.4rem;font-family:var(--mono);font-size:.72rem;color:var(--dim)}
+.uptime-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);animation:pulse-dot 2s infinite}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px) and (min-width:769px){
+  .nav-links{gap:1rem}
+  .nav-links a{font-size:.72rem}
+}
+@media(max-width:768px){
+  .hamburger{display:flex}
+  .nav-links{display:none;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--bg2);border-bottom:1px solid var(--border);padding:1.25rem 1.75rem;gap:1.1rem}
+  .nav-links.open{display:flex}
+  .about-grid,.skills-outer{grid-template-columns:1fr}
+  .learning-banner{grid-column:auto}
+  .hero-tagline{font-size:1.9rem}
+  section{padding:65px 0}
+  body{cursor:auto}
+  #cur,#cur-r{display:none}
+  .passport-photo-wrap{position:static;margin:0 0 1.5rem 0;display:flex;justify-content:flex-start}
+  .passport-photo{width:90px;height:115px}
+  .certs-grid{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  .projects-grid{grid-template-columns:1fr}
+  .terminal-window{font-size:.75rem}
+}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur-r"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="inner">
+    <a href="#hero" class="logo">
+      <span class="prompt">~/</span>Varshneya<span class="caret">_</span>
+    </a>
+    <ul class="nav-links" id="nl">
+      <li><a href="#about"><span>01.</span> About</a></li>
+      <li><a href="#skills"><span>02.</span> Skills</a></li>
+      <li><a href="#projects"><span>03.</span> Projects</a></li>
+      <li><a href="#certifications"><span>04.</span> Certifications</a></li>
+      <li><a href="#experience"><span>05.</span> Experience</a></li>
+      <li><a href="#contact" class="nav-hire"><span>06.</span> Contact</a></li>
+    </ul>
+    <div class="hamburger" id="hb"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="grid-bg"></div>
+  <div class="hero-glow"></div>
+
+  <!-- PASSPORT PHOTO — top right -->
+  <div class="passport-photo-wrap r">
+    <div style="position:relative;display:inline-block">
+      <div class="passport-photo">
+        <img src="photo.jpeg" alt="Varshneya"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+          style="display:block"/>
+        <div class="passport-photo-placeholder" style="display:none">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+          </svg>
+          <span>Add photo</span>
+        </div>
+      </div>
+      <div class="passport-photo-label">Varshneya</div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="terminal-window r" style="max-width:560px">
+      <div class="terminal-bar">
+        <div class="t-dot r"></div><div class="t-dot y"></div><div class="t-dot g"></div>
+        <span class="terminal-title">portfolio.json — bash</span>
+      </div>
+      <div class="terminal-body">
+        <div class="t-line"><span class="t-prompt">$</span><span class="t-cmd"> portfolio.json</span></div>
+        <div class="t-line" style="margin-top:.3rem"><span class="t-out">{</span></div>
+        <div class="t-line"><span class="t-out">&nbsp;&nbsp;<span class="t-key">"name"</span>: <span class="t-str">"Varshneya"</span>,</span></div>
+        <div class="t-line"><span class="t-out">&nbsp;&nbsp;<span class="t-key">"role"</span>: <span class="t-str">"CS Student"</span>,</span></div>
+        <div class="t-line"><span class="t-out">&nbsp;&nbsp;<span class="t-key">"year"</span>: <span class="t-num">2</span>,</span></div>
+        <div class="t-line"><span class="t-out">&nbsp;&nbsp;<span class="t-key">"looking_for"</span>: <span class="t-str">"internship"</span>,</span></div>
+        <div class="t-line"><span class="t-out">&nbsp;&nbsp;<span class="t-key">"open_to_work"</span>: <span class="t-num" style="color:var(--green)">true</span></span></div>
+        <div class="t-line"><span class="t-out">}</span></div>
+        <div class="t-line" style="margin-top:.4rem"><span class="t-prompt">$</span><span class="t-cur"></span></div>
+      </div>
+    </div>
+
+    <h1 class="hero-tagline r d1">
+      Hi, I'm <span class="hi">Varshneya</span><br>
+      <span class="dim">building things with code</span>
+    </h1>
+
+    <p class="hero-sub r d2">
+      2nd year Computer Science student at National Institute of Technology, Patna. I love building
+      web apps, solving DSA problems, and turning ideas into working software —
+      one commit at a time.
+    </p>
+
+    <div class="hero-badges r d2">
+      <span class="badge badge-green"><span class="dot"></span>Open to Internships</span>
+      <span class="badge badge-blue">CS Undergrad — Year 2</span>
+      <span class="badge badge-purple">National Institute of Technology, Patna</span>
+    </div>
+
+    <div class="hero-ctas r d3">
+      <a href="#projects" class="btn btn-primary">
+        View My Projects
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="https://drive.google.com/file/d/1aarTesIpi3ELBSljdSE1pIX5HhQXH-Qg/view?usp=drivesdk" target="_blank" class="btn btn-ghost">
+        Download Resume
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="scroll-hint"><div class="scroll-line"></div>scroll</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div>
+        <div class="sec-label r">about.me</div>
+        <h2 class="sec-title r d1">A bit about me</h2>
+        <div class="about-right r d2">
+          <p>I'm <strong>Varshneya</strong>, a 2nd year B.Tech Computer Science student at <strong>National Institute of Technology, Patna</strong>. I started coding in my first year and haven't stopped since.</p>
+          <p>I build full-stack web projects to practice what I learn in class — and to learn what class doesn't teach. Right now I'm focused on getting better at <strong>React, Node.js</strong>, and <strong>Data Structures &amp; Algorithms</strong>.</p>
+          <p>I'm actively looking for a <strong>summer internship</strong> where I can contribute to real projects, learn from experienced developers, and grow fast.</p>
+          <div class="highlight-box">
+            <span class="hb-label">// status</span>
+            Available for internships &amp; part-time work.<br>
+            Can start: June 2026 · Preferred: Remote / Hybrid
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="edu-card r d1">
+          <div class="edu-deg">B.Tech — Computer Science &amp; Engineering</div>
+          <div class="edu-uni">National Institute of Technology, Patna</div>
+          <div class="edu-year">2024 – 2028 &nbsp;·&nbsp; Expected Graduation: May 2028</div>
+          <div class="course-tags">
+            <span class="course-tag">Data Structures</span>
+            <span class="course-tag">Algorithms</span>
+            <span class="course-tag">DBMS</span>
+            <span class="course-tag">OS</span>
+            <span class="course-tag">OOP</span>
+            <span class="course-tag">Computer Networks</span>
+            <span class="course-tag">Discrete Math</span>
+          </div>
+        </div>
+        <div class="about-card r d2">
+          <div class="ac-label">// cgpa</div>
+          <div class="ac-val">9.21 / 10 <span style="font-size:.8rem;color:var(--muted)">· after 3 semesters</span></div>
+        </div>
+        <div class="about-card r d3">
+          <div class="ac-label">// currently learning</div>
+          <div class="ac-val">Data Structures &amp; Web Development (Frontend &amp; Backend)</div>
+          <div class="ac-sub">Building full-stack projects on the side</div>
+        </div>
+        <div class="about-card r d4">
+          <div class="ac-label">// problem solving</div>
+          <div class="ac-val">200+ DSA problems solved</div>
+          <div class="ac-sub">LeetCode · GFG · HackerRank</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-label r">skills.json</div>
+      <h2 class="sec-title r d1">What I know so far</h2>
+      <p class="sec-sub r d2">I'm still learning — but here's what I've picked up through coursework, projects, and a lot of late nights.</p>
+    </div>
+    <div class="skills-outer">
+      <div class="skill-block r">
+        <div class="sb-header">
+          <span class="sb-icon">🌐</span>
+          <span class="sb-name">Frontend</span>
+          <span class="sb-level">comfortable</span>
+        </div>
+        <div class="skill-list">
+          <span class="skill-pill">HTML5</span>
+          <span class="skill-pill">CSS3</span>
+          <span class="skill-pill">JavaScript</span>
+          <span class="skill-pill">React.js</span>
+          <span class="skill-pill">Tailwind CSS</span>
+          <span class="skill-pill">Responsive Design</span>
+        </div>
+      </div>
+      <div class="skill-block r d1">
+        <div class="sb-header">
+          <span class="sb-icon">⚙️</span>
+          <span class="sb-name">Backend &amp; DB</span>
+          <span class="sb-level">learning</span>
+        </div>
+        <div class="skill-list">
+          <span class="skill-pill">Node.js</span>
+          <span class="skill-pill">Express.js</span>
+          <span class="skill-pill">REST APIs</span>
+          <span class="skill-pill">MongoDB</span>
+          <span class="skill-pill">MySQL</span>
+          <span class="skill-pill">Firebase</span>
+        </div>
+      </div>
+      <div class="skill-block r d2">
+        <div class="sb-header">
+          <span class="sb-icon">💻</span>
+          <span class="sb-name">Languages</span>
+          <span class="sb-level">proficient</span>
+        </div>
+        <div class="skill-list">
+          <span class="skill-pill">C</span>
+          <span class="skill-pill">C++</span>
+          <span class="skill-pill">Python</span>
+          <span class="skill-pill">JavaScript</span>
+          <span class="skill-pill">Java (basics)</span>
+        </div>
+      </div>
+      <div class="skill-block r d3">
+        <div class="sb-header">
+          <span class="sb-icon">🛠️</span>
+          <span class="sb-name">Tools</span>
+          <span class="sb-level">daily use</span>
+        </div>
+        <div class="skill-list">
+          <span class="skill-pill">Git &amp; GitHub</span>
+          <span class="skill-pill">VS Code</span>
+          <span class="skill-pill">Postman</span>
+          <span class="skill-pill">Linux (basic)</span>
+          <span class="skill-pill">Figma (basic)</span>
+          <span class="skill-pill">Vercel</span>
+        </div>
+      </div>
+      <div class="learning-banner r d4">
+        <span class="lb-icon">📡</span>
+        <p class="lb-text">Currently exploring: <strong>Next.js</strong>, <strong>TypeScript</strong>, and <strong>System Design basics</strong>. Always adding more to this list.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-label r">projects/</div>
+      <h2 class="sec-title r d1">Things I've built</h2>
+      <p class="sec-sub r d2">Student projects &amp; side builds. Each one taught me something new.</p>
+    </div>
+    <div class="projects-grid">
+
+      <!-- Project 1 -->
+      <div class="proj-card r">
+        <div class="proj-header">
+          <div class="proj-icon-wrap">🎮</div>
+          <div class="proj-links-top">
+            <a href="https://github.com/Varshneya2006/game" class="proj-link-icon" title="GitHub" target="_blank">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-status"><span class="s-dot s-dot-live"></span>live</div>
+          <div class="proj-title">Simon Says Game</div>
+          <p class="proj-desc">Developed an interactive Simon Says game using HTML, CSS, and JavaScript for a fun and engaging web-based experience. Implemented game logic with dynamic color sequences for a responsive gameplay experience.</p>
+          <div class="proj-stack">
+            <span class="proj-tech">HTML</span>
+            <span class="proj-tech">CSS</span>
+            <span class="proj-tech">JavaScript</span>
+            <span class="proj-tech">Git &amp; GitHub</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="proj-card r d1">
+        <div class="proj-header">
+          <div class="proj-icon-wrap">🏫</div>
+          <div class="proj-links-top">
+            <a href="https://github.com/shivam-070208/Institutemangement" class="proj-link-icon" title="GitHub" target="_blank">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-status"><span class="s-dot s-dot-live"></span>live</div>
+          <div class="proj-title">Institute Management System</div>
+          <p class="proj-desc">Developed a full-fledged system to manage students, faculty, and fees efficiently. Built with Node.js and React for a scalable and interactive web application with real-time student management and seamless user experience.</p>
+          <div class="proj-stack">
+            <span class="proj-tech">Node.js</span>
+            <span class="proj-tech">Express.js</span>
+            <span class="proj-tech">React</span>
+            <span class="proj-tech">PostgreSQL</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-label r">certifications/</div>
+      <h2 class="sec-title r d1">Certifications</h2>
+      <p class="sec-sub r d2">Courses and credentials I've earned to sharpen my skills beyond the classroom.</p>
+    </div>
+    <div class="certs-grid">
+
+      <!-- Cert 1 -->
+      <a href="https://nptel.ac.in/noc/E_Certificate/NPTEL26CS84S46310040105010981" target="_blank" class="cert-card r">
+        <div class="cert-top">
+          <div class="cert-icon">🏅</div>
+          <span class="cert-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Completed
+          </span>
+        </div>
+        <div class="cert-title">NPTEL Joy Of Computing Using Python</div>
+        <div class="cert-issuer">NPTEL · IIT Ropar</div>
+        <div class="cert-date">Issued: May 2026</div>
+        <p class="cert-desc">Studied Python programming, various libraries and frameworks, and solved real-world problems as a 12-week course.</p>
+        <span class="cert-link">
+          View Certificate
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </span>
+      </a>
+
+      <!-- Cert 2 -->
+      <a href="https://drive.google.com/file/d/1B51OSweTwldygzUT3aJ9uQScGhE0Ti9L/view?usp=drivesdk" target="_blank" class="cert-card r d1">
+        <div class="cert-top">
+          <div class="cert-icon">🤖</div>
+          <span class="cert-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Completed
+          </span>
+        </div>
+        <div class="cert-title">Introduction to Generative AI</div>
+        <div class="cert-issuer">Upgrad</div>
+        <div class="cert-date">Issued: November 2025</div>
+        <p class="cert-desc">Studied the fundamentals of generative AI, including large language models, prompt engineering, and ethical considerations.</p>
+        <span class="cert-link">
+          View Certificate
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </span>
+      </a>
+
+      <!-- Cert 3 -->
+      <a href="https://drive.google.com/file/d/1bl10GH6uGdlsd3EjJ_EY2JvqUBResCJn/view?usp=drivesdk" target="_blank" class="cert-card r d2">
+        <div class="cert-top">
+          <div class="cert-icon">₿</div>
+          <span class="cert-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Completed
+          </span>
+        </div>
+        <div class="cert-title">Introduction to Cryptocurrency</div>
+        <div class="cert-issuer">Upgrad</div>
+        <div class="cert-date">Issued: November 2025</div>
+        <p class="cert-desc">Studied the fundamentals of cryptocurrency, including blockchain technology, digital wallets, and decentralized finance (DeFi).</p>
+        <span class="cert-link">
+          View Certificate
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </span>
+      </a>
+
+      <!-- Cert 4 -->
+      <a href="https://drive.google.com/file/d/1cUBcvM15BDlCRjUOmGxVMOOvw8GbfJZJ/view?usp=drive_link" target="_blank" class="cert-card r d3">
+        <div class="cert-top">
+          <div class="cert-icon">🗣️</div>
+          <span class="cert-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Completed
+          </span>
+        </div>
+        <div class="cert-title">Fundamentals of Communication</div>
+        <div class="cert-issuer">Upgrad</div>
+        <div class="cert-date">Issued: November 2025</div>
+        <p class="cert-desc">Studied the fundamentals of communication, including verbal and non-verbal communication, active listening, and effective presentation skills.</p>
+        <span class="cert-link">
+          View Certificate
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-label r">experience.log</div>
+      <h2 class="sec-title r d1">Experience &amp; Activities</h2>
+      <p class="sec-sub r d2">Here's what I've been doing to grow.</p>
+    </div>
+    <div class="tl">
+
+      <div class="tl-item r">
+        <div class="tl-dot"></div>
+        <div class="tl-when">Feb 2026 – Present</div>
+        <div class="tl-role">Vinternship (IIT Ropar)</div>
+        <div class="tl-where">VLED LAB · IIT Ropar</div>
+        <p class="tl-desc">Studied various concepts involved in MERN stack and built projects and solved case studies around it.</p>
+      </div>
+
+      <div class="tl-item r d1">
+        <div class="tl-dot"></div>
+        <div class="tl-when">Aug 2024</div>
+        <div class="tl-role">Participant — Hackathon (24hr)</div>
+        <div class="tl-where">ByteVerse Hackathon (NIT Patna) · Team of 3</div>
+        <p class="tl-desc">Built a student resource-sharing platform in 24 hours. Our team reached the top 10 out of 80+ teams. First hackathon experience — incredibly fun.</p>
+      </div>
+
+      <div class="tl-item r d2">
+        <div class="tl-dot"></div>
+        <div class="tl-when">Jun – Jul 2024</div>
+        <div class="tl-role">Self-Learning — Full Stack Bootcamp</div>
+        <div class="tl-where">Online (The Odin Project + YouTube)</div>
+        <p class="tl-desc">Completed a structured self-study plan during summer break covering HTML, CSS, JavaScript, and intro to Node. Built 5 mini-projects along the way.</p>
+      </div>
+
+      <div class="tl-item r d3">
+        <div class="tl-dot"></div>
+        <div class="tl-when">2023 – Present</div>
+        <div class="tl-role">Active on LeetCode &amp; GFG</div>
+        <div class="tl-where">DSA Practice · 200+ problems</div>
+        <p class="tl-desc">Solving DSA problems consistently — Arrays, Strings, Recursion, Trees, and Dynamic Programming. Targeting interview-ready by next year.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-inner">
+      <div class="sec-label r" style="justify-content:center">contact.sh</div>
+      <h2 class="sec-title r d1">Let's connect</h2>
+      <p class="sec-sub r d2" style="margin:0 auto">I'm actively looking for internship opportunities. If you're a recruiter, developer, or just want to talk code — reach out!</p>
+
+      <div class="contact-term r d2">
+        <div><span class="ct-label">status: &nbsp;</span><span class="ct-available">● open to internships</span></div>
+        <div><span class="ct-label">location: </span><span class="ct-val">Muzaffarpur, Bihar, India</span></div>
+        <div><span class="ct-label">email: &nbsp;&nbsp;</span><span class="ct-val">varshneya3182@gmail.com</span></div>
+        <div><span class="ct-label">response: </span><span class="ct-val">&lt; 24 hours</span></div>
+      </div>
+
+      <a href="mailto:varshneya3182@gmail.com" class="contact-email r d3">varshneya3182@gmail.com</a><br>
+
+      <div class="r d3">
+        <a href="mailto:varshneya3182@gmail.com" class="btn btn-primary" style="margin:0 auto;width:fit-content">
+          Send me an email
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/></svg>
+        </a>
+      </div>
+
+      <div class="socials r d4">
+        <a href="https://github.com/Varshneya2006" target="_blank" class="soc-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          GitHub
+        </a>
+        <a href="https://www.linkedin.com/in/varshneya20" target="_blank" class="soc-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://leetcode.com/u/varshneya2/" target="_blank" class="soc-btn">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15"><path d="M16.102 17.93l-2.697 2.607c-.466.467-1.111.662-1.823.662s-1.357-.195-1.823-.662l-4.875-4.973c-.466-.467-.702-1.15-.702-1.862 0-.701.27-1.39.736-1.857l4.862-4.966c.466-.467 1.11-.702 1.823-.702s1.357.235 1.823.702l2.697 2.606c.514.515 1.365.497 1.9-.038.535-.536.553-1.387.039-1.901l-2.609-2.519a6.021 6.021 0 0 0-2.307-1.554l2.848-2.921c.531-.545.531-1.424 0-1.97-.531-.545-1.39-.545-1.921 0L4.933 12.635c-1.024 1.024-1.024 2.678 0 3.702l4.888 4.97c.726.727 1.702 1.093 2.688 1.093.986 0 1.962-.366 2.688-1.093l2.697-2.607c.515-.515.497-1.366-.038-1.901-.535-.535-1.386-.553-1.9-.038"/></svg>
+          LeetCode
+        </a>
+        <a href="https://drive.google.com/file/d/1aarTesIpi3ELBSljdSE1pIX5HhQXH-Qg/view?usp=drivesdk" target="_blank" class="soc-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          Resume
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fw">
+    <p>© 2026 <a href="#hero">Varshneya</a>. Designed &amp; built by me.</p>
+    <div class="uptime"><div class="uptime-dot"></div>open to opportunities</div>
+  </div>
+</footer>
+
+<script>
+// cursor
+const cur=document.getElementById('cur'),ring=document.getElementById('cur-r');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function tick(){
+  cur.style.left=mx+'px';cur.style.top=my+'px';
+  rx+=(mx-rx)*.13;ry+=(my-ry)*.13;
+  ring.style.left=rx+'px';ring.style.top=ry+'px';
+  requestAnimationFrame(tick);
+})();
+
+// hamburger
+document.getElementById('hb').addEventListener('click',()=>document.getElementById('nl').classList.toggle('open'));
+
+// nav shrink
+window.addEventListener('scroll',()=>{document.getElementById('nav').style.padding=scrollY>40?'.6rem 0':'1rem 0';});
+
+// reveal
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target);}});},{threshold:.1,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.r').forEach(el=>obs.observe(el));
+
+// hero reveal immediately
+setTimeout(()=>{document.querySelectorAll('#hero .r').forEach((el,i)=>setTimeout(()=>el.classList.add('on'),80+i*130));},100);
+
+// typed effect in terminal
+const lines=document.querySelectorAll('.terminal-body .t-out');
+lines.forEach((l,i)=>{l.style.opacity='0';setTimeout(()=>{l.style.transition='opacity .2s';l.style.opacity='1';},400+i*120);});
+</script>
+</body>
+</html>
